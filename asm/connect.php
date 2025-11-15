@@ -1,7 +1,7 @@
 <?php 
 //khai báo kết nối cơ sở dữ liệu
 $serverName = 'localhost'; //host-servername: localhost
-$dbName = 'wd21201'; //dbname
+$dbName = 'wd21201_php'; //dbname
 $userName = 'root'; //username
 $password = '';//password
 try {
