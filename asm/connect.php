@@ -12,6 +12,8 @@ try {
     );
     //cài đặt hiển thị lỗi 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //cài đặt dữ liệu  trả về
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Connection failed".$e->getMessage();
 }

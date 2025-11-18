@@ -5,7 +5,12 @@ require_once './connect.php';
 $id = $_GET['id'];
 //B2: truy vấn dữ liệu từ DB
 //lấy 1 bản ghi duy nhất dựa vào id => sử dụng hàm fetch();
-$product = $conn->query("SELECT * FROM products WHERE id='$id'")->fetch();
+// $product = $conn->query("SELECT * FROM products WHERE id='$id'")->fetch();
+$product = $conn->query("SELECT products.*, categories.name AS cate_name
+    FROM products
+    JOIN categories
+    ON products.category_id = categories.id
+    WHERE products.id='$id'")->fetch();
 
 ?>
 
@@ -29,6 +34,6 @@ $product = $conn->query("SELECT * FROM products WHERE id='$id'")->fetch();
     <h1>Price: <?= $product['price'] ?></h1>
     <h1>Image</h1>
     <img src="<?= $product['image'] ?>" alt="">
-    <h1>Category: <?= $product['category_id'] ?></h1>
+    <h1>Category: <?= $product['cate_name'] ?></h1>
 </body>
 </html>

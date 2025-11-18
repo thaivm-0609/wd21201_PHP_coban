@@ -3,7 +3,13 @@ require_once './connect.php';
 
 //truy vấn dữ liệu => gán cho biến $products
 //lấy nhiều bản ghi => sử dụng hàm fetchAll();
-$products = $conn->query("SELECT * FROM products")->fetchAll();
+// $products = $conn->query("SELECT * FROM products")->fetchAll();
+$products = $conn->query("SELECT products.*, categories.name AS cate_name 
+    FROM products 
+    JOIN categories 
+    ON products.category_id = categories.id"
+    )->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +43,15 @@ $products = $conn->query("SELECT * FROM products")->fetchAll();
                     <td>
                         <img src="<?= $p['image'] ?>" alt="">
                     </td>
-                    <td><?= $p['category_id'] ?></td>
+                    <td><?= $p['cate_name'] ?></td>
                     <td>
                         <a href="./detail.php?id=<?= $p['id'] ?>">Detail</a>
+                        <a 
+                            onclick="return confirm('Bạn có chắc không?')"
+                            href="./delete.php?id=<?= $p['id'] ?>"
+                        >
+                            Delete
+                        </a>
                     </td>
                 </tr>
             <?php } ?>
