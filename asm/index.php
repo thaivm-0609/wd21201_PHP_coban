@@ -46,6 +46,7 @@ $products = $conn->query("SELECT products.*, categories.name AS cate_name
                     <td><?= $p['cate_name'] ?></td>
                     <td>
                         <a href="./detail.php?id=<?= $p['id'] ?>">Detail</a>
+                        <a href="./edit.php?id=<?= $p['id'] ?>">Edit</a>
                         <a 
                             onclick="return confirm('Bạn có chắc không?')"
                             href="./delete.php?id=<?= $p['id'] ?>"
