@@ -12,10 +12,19 @@ if (isset($_GET['id']) && $_GET['id']>0) {
     //B2: gửi dữ liệu lên server để cập nhật bản ghi
     if (isset($_POST['submit'])) {
         //B2.1: lấy dữ liệu từ form
-
+        $name = $_POST['name'];
+        $price = $_POST['price'];
+        $image = $_POST['image'];
+        $description = $_POST['description'];
+        $categoryId = $_POST['category_id'];
         //B2.2: khai báo câu truy vấn
-        
+        $sql = "UPDATE products 
+            SET name='$name', price='$price', image='$image', 
+                description='$description', category_id='$categoryId'
+            WHERE id='$id'";
+        $conn->exec($sql);
         //B2.3: điều hướng ng dùng về trang danh sách
+        header('location: index.php');
     }
 }
 ?>
@@ -29,7 +38,7 @@ if (isset($_GET['id']) && $_GET['id']>0) {
 </head>
 <body>
     <h1>Đây là trang chỉnh sửa</h1>
-        <form action="./create.php" method="POST">
+        <form action="./edit.php?id=<?= $product['id'] ?>" method="POST">
         <div>
             <label for="">Name</label>
             <input type="text" name="name" value="<?= $product['name'] ?>">
@@ -58,7 +67,7 @@ if (isset($_GET['id']) && $_GET['id']>0) {
                 <?php } ?>
             </select>
         </div>
-        <button type="submit" name="submit">Create</button>
+        <button type="submit" name="submit">Update</button>
     </form>
 </body>
 </html>
