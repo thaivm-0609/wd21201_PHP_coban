@@ -1,6 +1,7 @@
 <?php 
 require_once './connect.php';
 
+session_start();
 //truy vấn dữ liệu => gán cho biến $products
 //lấy nhiều bản ghi => sử dụng hàm fetchAll();
 // $products = $conn->query("SELECT * FROM products")->fetchAll();
@@ -20,6 +21,13 @@ $products = $conn->query("SELECT products.*, categories.name AS cate_name
     <title>Document</title>
 </head>
 <body>
+    <?php if (isset($_SESSION['user'])) { ?>
+        <h1>Xin chào, <?= $_SESSION['user']['email'] ?></h1>
+
+        <a href="./logout.php">Đăng xuất</a>
+    <?php } else { ?>
+        <h1>Bạn chưa đăng nhập</h1>
+    <?php } ?>
     <h1>Danh sách</h1>
     <table>
         <thead>
